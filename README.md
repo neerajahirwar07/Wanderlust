@@ -29,7 +29,7 @@ A full-stack Airbnb-inspired web application built using Node.js, Express.js, Mo
 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/Wanderlust.git
+git clone https://github.com/@neerajahirwar/Wanderlust.git
 ```
 
 2. Install dependencies
