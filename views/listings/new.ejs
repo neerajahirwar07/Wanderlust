@@ -1,0 +1,53 @@
+<% layout("layouts/boilerplate") %>
+<body>
+<div class="row">
+   <div class="col-8 offset-2">
+    <form action="/listings" method="POST" novalidate class="needs-validation" enctype="multipart/form-data">
+        <br/>
+           <h2>Create New listing</h2>
+        <div class="mb-3">
+         <label for="title" class="form-level">title</label>
+          <input type="text" name="list[title]" placeholder="title" class="form-control" required>
+          <div class="valid-feedback">title looks good !</div>
+
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-level">Description</label>
+            <textarea name="list[description]" placeholder="description" class="form-control" required></textarea>
+             <div class="invalid-feedback">Description should be valid </div>
+        </div>
+
+        <!-- <div class="mb-3">
+        <label for="image" class="form-level">Image url</label>
+        <input type="link" name="list[image]" placeholder="imgage url" class="form-control" >
+        </div> -->
+         <div class="mb-3">
+        <label for="image" class="form-level">Image upload</label>
+        <input type="file" name="list[image]" class="form-control" required >
+        </div>
+
+        <div class="mb-3"> 
+            <label for="number" class="form-level">price</label>
+            <input type="text" name="list[price]" placeholder="Price" class="form-control" required>
+             <div class="invalid-feedback">price should be valid </div>
+        </div>
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                    <label for="text" class="form-level">Location</label>
+                    <input type="text" name="list[location]" placeholder="location" class="form-control" required>
+                      <div class="invalid-feedback">location should be valid </div>
+                </div>
+
+                <div class="mb-3 col-md-8">
+                    <label for="text" class="form-level">country</label>
+                    <input type="text" name="list[country]" placeholder="country" class="form-control" required>
+                      <div class="invalid-feedback">country name  should be valid </div>
+                </div>
+            </div>
+       <br/>
+     <button type="submit" class="btn btn-primary mb-2">Create</button>
+    </form>
+  </div>
+</div>
+</body>

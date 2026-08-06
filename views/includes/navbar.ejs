@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg  bg-body-tertiary sticky-top border-bottom">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link "  href="/listings">Home</a>
+        </li>
+         </ul>
+    </div>
+        
+     <div class="container-search col-4">
+    <form class="d-flex" role="search">
+      <input class="form-control me-2 nav-search" type="search" placeholder="Search destination" aria-label="Search"/>
+      <button class="btn  col-3 nav-search-btn" type="submit">Search <i class="fa-solid fa-magnifying-glass"></i></button>
+    </form>
+      </div>
+
+        <div class="navbar-nav ms-suto">
+          <li class="nav-item ">
+             <a class="nav-link "  href="/listings/new"><button type="button" class="btn btn-light">Add new Listing</button></a>
+          </li>
+        </div>
+        
+      <div class="navbar-nav ms-suto" >
+         <% if(!currUser){ %>
+        <a class="nav-link "  href="/signup">
+          <i class="fa-regular fa-circle-user" style="color: rgb(13, 13, 13);"></i>
+          <b>Signup</b></a>
+        <a class="nav-link "  href="/login"><b>Login</b></a>
+         <% } %>
+          <% if(currUser){ %>
+          <a class="nav-link "  href="/logout"><b>Logout</b> 
+            <i class="fa-regular fa-circle-left fa-rotate-180" style="color: rgb(100, 100, 100);"></i>
+          </a>
+         <% } %>
+      </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+

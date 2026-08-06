@@ -1,0 +1,139 @@
+
+
+body{
+     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+   
+}
+
+.flex-grow-1 {
+    flex: 1;
+}
+
+/* Navbar */
+.navbar{
+   /* height: 5rem; */
+   background-color:white;
+    
+}
+.navbar-nav-collection{
+    display: flex;
+    height: 40px;
+    width: 50%;
+    margin-left: 7%;
+    border-radius: 5rem;
+    align-items: center;
+    justify-content: center;
+    justify-content:space-evenly;
+}
+.fa-compass{
+    color: red;
+    font-size: 2rem;
+}
+.nav-link {
+    color:#222222;
+}
+.nav-link:hover{
+  color: #222;
+}
+.nav-search{
+ border-radius: 2rem;
+}
+.nav-search-btn{
+ border-radius: 2rem;
+ background-color:#fe424d;
+ color:#ebebeb;
+ padding:0px 3px 2px 3px;
+}
+
+/* footer */
+
+
+.footer {
+    height: 8rem;
+    background-color: #ebebeb;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    
+}
+
+.f-info-socials,
+.f-info-links,
+.f-info-brand {
+    width: 100%;
+}
+
+.f-info-socials i {
+    font-size: 1.3rem;
+    margin: 0 0.75rem;
+    color: #222;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.f-info-socials i:hover {
+    color: #fe424d;
+}
+
+.f-info-links a {
+    text-decoration: none;
+    color: #222;
+    margin: 0 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+.f-info-brand {
+    color: #444;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* cards */
+.listing-card{
+    margin-bottom: 2rem;  
+}
+.card-img-top{
+   border-radius: 10px;
+   width: 100%;
+   object-fit: cover;
+
+}
+.card-img-top:hover{
+  opacity:.7;
+
+}
+.card-title{
+    color: #222222;
+}
+.card-bod{
+    padding: 0;
+}
+.card-text p{
+    font-weight: 200;
+}
+/* show page */
+.card-img-top-show-page{
+    height: 40vh;
+    width: 90vh;
+    border-radius: 15px;
+}
+
+/* Review section  */
+.card{
+    border-radius: 10px;
+}
+
+/* new listings add  */
+.btn-light{
+    border-radius: 5rem;
+}
