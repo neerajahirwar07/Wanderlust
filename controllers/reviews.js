@@ -1,4 +1,4 @@
-const listing=require("../models/listing");
+const listing=require("../models/listing.js");
 const Review=require("../models/review.js");
 // post reviews
 module.exports.reviewpost=async(req,res)=>{

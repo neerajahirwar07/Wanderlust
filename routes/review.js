@@ -4,7 +4,7 @@ const wrapAsync=require("../utilis/wrapAsync.js");
 const { wrap } = require("module");
 const {validateReview,isLogedin,isReviewAuthor}=require("../middleware.js");
 
-const reviewcontroller=require("../controller/reviews.js");
+const reviewcontroller=require("../controllers/reviews.js");
 
 
 // post new review 

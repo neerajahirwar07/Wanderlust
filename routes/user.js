@@ -5,7 +5,7 @@ const User=require("../models/user.js");
 const wrapAsync = require("../utilis/wrapAsync.js");
 const passport = require("passport");
 const {saveRedirectUrl}=require("../middleware.js");
-const usercontroller=require("../controller/users.js");
+const usercontroller=require("../controllers/users.js");
 
 //signup route
 router.get("/signup",(req,res)=>{
