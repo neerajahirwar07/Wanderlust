@@ -134,21 +134,22 @@ http://localhost:8080/listings
 
 ### Home Page
 
-> Add Screenshot Here
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/09cf9e3a-617d-410d-bc61-c054d1245137" />
+
 
 ### Listing Details
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/9d291866-30d7-4af5-b8a6-8e6fc44b6716" />
 
-> Add Screenshot Here
+
 
 ### Create Listing
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/b09fa6ba-5d15-4a35-8516-d1abd2986064" />
 
-> Add Screenshot Here
 
 ### Login Page
 
-> Add Screenshot Here
+<img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/9c88cd72-e42f-475f-b61a-00d71255ab32" />
 
----
 
 ## 🔐 Authentication
 
