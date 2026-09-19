@@ -7,7 +7,6 @@ const ReviewSchema=new Schema({
         type:String,
         min:1,
         max:200,
-        // required:true,
     },
     rating: {
         type:Number,
@@ -27,5 +26,3 @@ const ReviewSchema=new Schema({
 })
 
 module.exports=mongoose.model("Review",ReviewSchema);
-
-

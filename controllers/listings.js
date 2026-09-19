@@ -2,18 +2,36 @@ const listing=require("../models/listing");
 const { updateMany } = require("../models/review");
 
 module.exports.index=async(req,res)=>{
- let Alllisting=  await listing.find({});
- res.render("listings/index.ejs",{Alllisting});      
+ let { search } = req.query;
+ let filter = {};
+
+ if(search && search.trim() !== ""){
+   let regex = new RegExp(search.trim(), "i");
+   filter = {
+     $or: [
+       { title: regex },
+       { location: regex },
+       { country: regex },
+     ]
+   };
+ }
+
+ let Alllisting=  await listing.find(filter);
+ res.render("listings/index.ejs",{Alllisting, search: search || ""});      
 }
 
 module.exports.Show=async(req,res)=>{
     let {id}=req.params;
     let fulldetail=  await listing.findById(id).populate({path:"reviews", populate:{path:"author"}}).populate("owner");
+  console.log("POPULATED OWNER:", fulldetail.owner);
     if(!fulldetail){
     req.flash("error","listing is not exist");
     return  res.redirect("/listings");
     }
-    res.render("listings/show.ejs",{listing:fulldetail});
+    let discount = req.query.discount === "true";
+    res.render("listings/show.ejs",{listing:fulldetail,discount});
+
+
 }
 
 module.exports.New=async(req,res)=>{

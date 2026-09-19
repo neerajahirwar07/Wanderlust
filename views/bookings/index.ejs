@@ -1,0 +1,55 @@
+<% layout("layouts/boilerplate") %>
+  <div class="col-md-8 offset-md-2 mt-3">
+    <h2 class="mb-4">My Trips</h2>
+
+    <% if(bookings.length === 0) { %>
+      <p>You haven't booked any trips yet. <a href="/listings">Explore listings</a></p>
+    <% } %>
+
+    <% for(booking of bookings) { %>
+      <div class="card mb-3 p-3">
+        <div class="row">
+          <% if(booking.listing) { %>
+            <div class="col-md-3">
+              <img src="<%= booking.listing.image.url %>" class="img-fluid rounded" alt="<%= booking.listing.title %>">
+            </div>
+            <div class="col-md-6">
+              <h5><%= booking.listing.title %></h5>
+              <p class="mb-1"><%= booking.listing.location %>, <%= booking.listing.country %></p>
+          <% } else { %>
+            <div class="col-md-9">
+              <h5 class="text-muted">Listing no longer available</h5>
+          <% } %>
+
+              <p class="mb-1">
+                <b>Check-in:</b> <%= booking.checkIn.toDateString() %> &nbsp;
+                <b>Check-out:</b> <%= booking.checkOut.toDateString() %>
+              </p>
+              <p class="mb-1">
+                <b>Total Paid:</b> &#8377;<%= booking.totalPrice.toLocaleString("en-IN") %>
+                <% if(booking.discountApplied) { %>
+                  <span class="badge bg-success ms-1">15% OFF Applied</span>
+                <% } %>
+              </p>
+              <p class="mb-1">
+                <b>Status:</b>
+                <span class="badge <%= booking.status === 'cancelled' ? 'bg-secondary' : (booking.status === 'confirmed' ? 'bg-success' : 'bg-warning text-dark') %>">
+                  <%= booking.status %>
+                </span>
+                <b class="ms-2">Payment:</b>
+                <span class="badge <%= booking.paymentStatus === 'paid' ? 'bg-success' : (booking.paymentStatus === 'refunded' ? 'bg-danger' : 'bg-warning text-dark') %>">
+                  <%= booking.paymentStatus %>
+                </span>
+              </p>
+          </div>
+          <div class="col-md-3 d-flex align-items-center">
+            <% if(booking.status === "confirmed") { %>
+              <form action="/bookings/<%=booking._id%>?_method=DELETE" method="POST">
+                <button type="submit" class="btn btn-outline-danger btn-sm">Cancel Booking</button>
+              </form>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    <% } %>
+  </div>

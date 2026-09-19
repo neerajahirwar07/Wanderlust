@@ -13,6 +13,8 @@ const ejsMate=require("ejs-mate");
 const listingsRouter=require("./routes/listings.js");
 const reviewsRouter=require("./routes/review.js");
 const userRouter=require("./routes/user.js");
+const bookingsRouter=require("./routes/bookings.js");
+const myBookingsRouter=require("./routes/mybookings.js");
 
 
 
@@ -27,6 +29,7 @@ const  db_url=process.env.ATLAS_URL;
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(methodOverride("_method"));
 app.engine("ejs",ejsMate);
 app.use(express.static(path.join(__dirname,"/public")));
@@ -85,8 +88,13 @@ app.use((req, res, next) => {
 
 app.use("/listings",listingsRouter);
 app.use("/listings/:id/reviews",reviewsRouter);
+app.use("/listings/:id/bookings",bookingsRouter);
+app.use("/bookings",myBookingsRouter);
 app.use("/",userRouter);
 
+app.get("/",(req,res)=>{
+    res.redirect("/listings");
+})
 
 // console.log("ATLAS_URL =", process.env.ATLAS_URL);
 // let mongodb_url="mongodb://127.0.0.1:27017/Wanderlust";
@@ -101,9 +109,6 @@ async function main(){
 
 
 
-// app.get("/",(req,res)=>{
-//     res.send("i am root!");
-// })
 
 // cookie- parser
 // app.get("/greet",(req,res)=>{

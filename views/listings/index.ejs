@@ -1,10 +1,17 @@
 <% layout("layouts/boilerplate") %>
 <body>
   <div class="row mt-5">
+
+  <% if(Alllisting.length === 0) { %>
+    <div class="col-12 mt-3">
+      <p>No listings found<% if(typeof search !== "undefined" && search) { %> matching "<%= search %>"<% } %>. Try a different search or <a href="/listings">view all listings</a>.</p>
+    </div>
+  <% } %>
+
   <% for(let listing of Alllisting){ %>
 
     <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-      <a href="/listings/<%= listing._id %>" style="text-decoration:none; color:inherit;">
+      <a href="/listings/<%= listing._id %>" class="listing-link" style="text-decoration:none; color:inherit;">
 
         <div class="card h-100">
           <img src="<%= listing.image.url%>" class="card-img-top" alt="image">
@@ -12,11 +19,14 @@
           <div class="card-body">
             <h5 class="card-title"><%= listing.title %></h5>
             <p class="card-text"><%= listing.description %></p>
-            <p class="card-text" min="0" required>
+            <p class="card-text price-display" data-price="<%= listing.price %>" min="0" required>
               &#8377;<%= listing.price.toLocaleString("en-IN") %>/night
             </p>
             <p class="card-text"><%= listing.location %></p>
             <p class="card-text"><%= listing.country %></p>
+            <button type="button" class="btn btn-sm btn-outline-success discount-btn" data-listing-id="<%= listing._id %>">
+              Apply 15% Discount
+            </button>
           </div>
 
         </div>
@@ -25,4 +35,35 @@
 
   <% } %>
 </div>
+
+<script>
+  document.querySelectorAll(".discount-btn").forEach(function (btn) {
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const card = btn.closest(".card");
+      const priceEl = card.querySelector(".price-display");
+      const link = btn.closest("a.listing-link");
+      const listingId = btn.dataset.listingId;
+      const originalPrice = Number(priceEl.dataset.price);
+      const alreadyApplied = link.href.includes("discount=true");
+
+      if (!alreadyApplied) {
+        const discounted = Math.round(originalPrice * 0.85);
+        priceEl.innerHTML = `<span style="text-decoration:line-through; color:#888;">&#8377;${originalPrice.toLocaleString("en-IN")}</span> &#8377;${discounted.toLocaleString("en-IN")}/night <span class="badge bg-success">15% OFF</span>`;
+        link.href = `/listings/${listingId}?discount=true`;
+        btn.textContent = "Discount Applied ✓";
+        btn.classList.remove("btn-outline-success");
+        btn.classList.add("btn-success");
+      } else {
+        priceEl.innerHTML = `&#8377;${originalPrice.toLocaleString("en-IN")}/night`;
+        link.href = `/listings/${listingId}`;
+        btn.textContent = "Apply 15% Discount";
+        btn.classList.remove("btn-success");
+        btn.classList.add("btn-outline-success");
+      }
+    });
+  });
+</script>
 </body>

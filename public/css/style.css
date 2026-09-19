@@ -1,50 +1,135 @@
 
 
-body{
-     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-   
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #fafafa;
 }
-
 .flex-grow-1 {
     flex: 1;
 }
 
-/* Navbar */
-.navbar{
-   /* height: 5rem; */
-   background-color:white;
-    
+
+
+/* Navbar — glassmorphism + sticky polish */
+.navbar {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.05);
+  padding: 0.8rem 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.3s ease;
 }
-.navbar-nav-collection{
-    display: flex;
-    height: 40px;
-    width: 50%;
-    margin-left: 7%;
-    border-radius: 5rem;
-    align-items: center;
-    justify-content: center;
-    justify-content:space-evenly;
+
+/* Logo with animated ring on hover */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  position: relative;
+  transition: transform 0.3s ease;
 }
-.fa-compass{
-    color: red;
-    font-size: 2rem;
+
+.navbar-brand:hover {
+  transform: rotate(-20deg) scale(1.15);
 }
+
+.fa-compass {
+  color: #fe424d;
+  font-size: 2rem;
+  filter: drop-shadow(0 2px 4px rgba(254, 66, 77, 0.25));
+}
+
+/* Search bar — refined with icon separation */
+.nav-search-form {
+  align-items: center;
+  background-color: #f7f7f7;
+  border: 1px solid transparent;
+  border-radius: 2.5rem;
+  padding: 0.25rem 0.35rem;
+  transition: all 0.25s ease;
+}
+
+.nav-search-form:hover {
+  background-color: #f0f0f0;
+}
+
+.nav-search-form:focus-within {
+  background-color: #ffffff;
+  border-color: #fe424d;
+  box-shadow: 0 4px 16px rgba(254, 66, 77, 0.15);
+}
+
+.nav-search {
+  min-width: 220px;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent;
+}
+
+.nav-search:focus {
+  outline: none;
+}
+
+.nav-search-btn {
+  transition: transform 0.2s ease;
+}
+
+.nav-search-form:focus-within .nav-search-btn {
+  transform: scale(1.05);
+}
+
+/* Nav links — animated underline instead of background fill */
+
 .nav-link {
-    color:#222222;
+  color: #222222;
+  font-weight: 500;
+  position: relative;
+  padding: 0.5rem 0.7rem;
+  transition: color 0.2s ease;
 }
-.nav-link:hover{
-  color: #222;
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0.15rem;
+  left: 0.7rem;
+  width: 0;
+  height: 2px;
+  background-color: #fe424d;
+  border-radius: 2px;
+  transition: width 0.25s ease;
 }
-.nav-search{
- border-radius: 2rem;
+
+.nav-link:hover {
+  color: #fe424d;
 }
-.nav-search-btn{
- border-radius: 2rem;
- background-color:#fe424d;
- color:#ebebeb;
- padding:0px 3px 2px 3px;
+
+.nav-link:hover::after {
+  width: calc(100% - 1.4rem);
+}
+
+.nav-link.active {
+  color: #fe424d;
+  font-weight: 700;
+}
+
+.nav-link.active::after {
+  width: calc(100% - 1.4rem);
+}
+
+/* "Add new Listing" button — make it stand out slightly */
+.btn-light {
+  border: 1px solid #dddddd;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-light:hover {
+  border-color: #fe424d;
+  color: #fe424d;
+  background-color: #fff5f5;
 }
 
 /* footer */
@@ -125,7 +210,8 @@ body{
 /* show page */
 .card-img-top-show-page{
     height: 40vh;
-    width: 90vh;
+    width: 100%;
+    object-fit: cover;
     border-radius: 15px;
 }
 
@@ -135,7 +221,208 @@ body{
     height: 100%;
 }
 
+.starability-basic {
+  display: flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  width: max-content;
+}
+
+.starability-basic input,
+.starability-basic label {
+  display: inline-block !important;
+  float: none !important;
+}
+
 /* new listings add  */
 .btn-light{
     border-radius: 5rem;
+}
+
+
+
+
+/* Show page */
+.show-container {
+  max-width: 850px;  
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.listing-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 0.2rem;
+}
+
+.listing-subtitle {
+  color: #717171;
+  margin-bottom: 1.2rem;
+}
+
+.card-img-top-show-page {
+  height: 45vh;
+  width: 100%;
+  object-fit: fill;   /* cover se contain kiya */
+  border-radius: 15px;
+  margin-bottom: 2rem;
+}
+
+.show-content-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.detail-card {
+  border: 1px solid #ebebeb;
+  border-radius: 14px;
+  padding: 1.5rem;
+}
+
+.listing-desc {
+  color: #444;
+  line-height: 1.6;
+  margin: 0.8rem 0;
+}
+
+.listing-price {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #222;
+}
+
+.listing-price span {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #717171;
+}
+
+.owner-actions {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.booking-sidebar {
+  position: sticky;
+  top: 90px;
+}
+
+.booking-card {
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.booking-card h4 {
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.date-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.date-row label,
+.guests-row label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.guests-row {
+  margin-bottom: 0.8rem;
+}
+
+.price-breakdown {
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.btn-book {
+  width: 100%;
+  background-color: #fe424d;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.7rem;
+  border-radius: 10px;
+  border: none;
+  transition: background-color 0.2s ease;
+}
+
+.btn-book:hover {
+  background-color: #e02d38;
+  color: #fff;
+}
+
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.review-card {
+  border: 1px solid #ebebeb;
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+}
+
+.review-btn{
+ margin-left:87%;
+}
+
+@media (max-width: 900px) {
+  .show-content-grid {
+    grid-template-columns: 1fr;
+  }
+  .booking-sidebar {
+    position: static;
+  }
+}
+
+/* listings card */
+.listing-link .card {
+  border: none;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+.listing-link:hover .card {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+}
+
+.listing-link .card-img-top {
+  transition: transform 0.4s ease;
+}
+
+.listing-link:hover .card-img-top {
+  transform: scale(1.1);
+}
+
+.listing-link .card-title {
+  transition: color 0.2s ease;
+}
+
+.listing-link:hover .card-title {
+  color: #fe424d;
+}
+
+.listing-link .discount-btn {
+  opacity: 0.85;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.listing-link:hover .discount-btn {
+  opacity: 1;
+  transform: translateY(-2px);
 }

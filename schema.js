@@ -21,3 +21,13 @@ module.exports.ReviewSchema=joi.object({
        
     }).required()
 })
+
+module.exports.BookingSchema=joi.object({
+    booking: joi.object({
+        checkIn: joi.date().required(),
+        checkOut: joi.date().greater(joi.ref("checkIn")).required()
+            .messages({ "date.greater": "Check-out date must be after check-in date" }),
+        guests: joi.number().min(1).required(),
+        discountApplied: joi.boolean().optional(),
+    }).required()
+})

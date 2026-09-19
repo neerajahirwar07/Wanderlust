@@ -1,0 +1,44 @@
+<% layout("layouts/boilerplate") %>
+<body>
+  <div class="col-md-8 offset-md-2 mt-3">
+    <h2 class="mb-4">Booking Requests</h2>
+
+    <% if(bookings.length === 0) { %>
+      <p>No bookings yet on your listings.</p>
+    <% } %>
+
+    <% for(booking of bookings) { %>
+      <div class="card mb-3 p-3">
+        <div class="row">
+          <div class="col-md-3">
+            <img src="<%= booking.listing.image.url %>" class="img-fluid rounded" alt="<%= booking.listing.title %>">
+          </div>
+          <div class="col-md-9">
+            <h5><%= booking.listing.title %></h5>
+            <p class="mb-1"><b>Guest:</b> <%= booking.user.username %></p>
+            <p class="mb-1">
+              <b>Check-in:</b> <%= booking.checkIn.toDateString() %> &nbsp;
+              <b>Check-out:</b> <%= booking.checkOut.toDateString() %>
+            </p>
+                       <p class="mb-1"><b>Total:</b> &#8377;<%= booking.totalPrice.toLocaleString("en-IN") %></p>
+            <p class="mb-1">
+              <b>Status:</b>
+              <span class="badge <%= booking.status === 'cancelled' ? 'bg-secondary' : 'bg-success' %>">
+                <%= booking.status %>
+              </span>
+              <b class="ms-2">Payment:</b>
+              <span class="badge <%= booking.paymentStatus === 'refunded' ? 'bg-dark' : 'bg-success' %>">
+                <%= booking.paymentStatus %>
+              </span>
+            </p>
+            <% if(booking.paymentStatus === "paid") { %>
+              <form action="/bookings/<%=booking._id%>/refund" method="POST" onsubmit="return confirm('Cancel this booking and refund ₹' + <%= booking.totalPrice %> + ' to the guest?');">
+                <button type="submit" class="btn btn-outline-danger btn-sm mt-2">Cancel &amp; Refund</button>
+              </form>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</body>

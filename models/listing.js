@@ -11,9 +11,6 @@ const listingSchema=new Schema({
         required :true
     },
     image: {
-        // type:String,
-        // default:"https://picsum.photos/800/600",
-        // set:(v)=> v==="" ?"https://picsum.photos/800/600":v,
         url:String,
         filename:String,
     },
@@ -53,4 +50,3 @@ listingSchema.post("findOneAndDelete",async(listing)=>{
 });
 const listing=mongoose.model("listing",listingSchema);
 module.exports=listing;
-

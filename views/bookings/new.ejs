@@ -1,0 +1,60 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="show-container">
+  <div class="booking-card mx-auto" style="max-width:500px;">
+    <h4>Book: <%= listing.title %></h4>
+    <p class="text-muted"><%= listing.location %>, <%= listing.country %></p>
+    <form action="/listings/<%=listing._id%>/bookings" method="POST" novalidate class="needs-validation" id="booking-form">
+            
+      <input type="hidden" name="booking[discountApplied]" value="<%= discount ? 'true' : 'false' %>">
+      <div class="date-row">
+        <div>
+          <label for="checkIn">Check-in</label>
+          <input type="date" class="form-control" id="checkIn" name="booking[checkIn]" required>
+        </div>
+        <div>
+          <label for="checkOut">Check-out</label>
+          <input type="date" class="form-control" id="checkOut" name="booking[checkOut]" required>
+        </div>
+      </div>
+      <div class="guests-row">
+        <label for="guests">Guests</label>
+        <input type="number" class="form-control" id="guests" name="booking[guests]" min="1" value="1" required>
+      </div>
+      <p class="price-breakdown" id="price-breakdown"></p>
+      <button class="btn btn-book" type="submit">Confirm Booking</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const pricePerNight = <%= discount ? Math.round(listing.price * 0.85) : listing.price %>;
+    const originalPricePerNight = <%= listing.price %>;
+    const discountActive = <%= discount ? 'true' : 'false' %>;
+    const checkIn = document.getElementById("checkIn");
+    const checkOut = document.getElementById("checkOut");
+    const breakdown = document.getElementById("price-breakdown");
+    const today = new Date().toISOString().split("T")[0];
+    checkIn.min = today;
+    function updatePrice() {
+      checkOut.min = checkIn.value || today;
+      if (!checkIn.value || !checkOut.value) { breakdown.textContent = ""; return; }
+      const start = new Date(checkIn.value);
+      const end = new Date(checkOut.value);
+      const nights = Math.ceil((end - start) / (1000*60*60*24));
+      if (nights > 0) {
+        const total = nights * pricePerNight;
+        if (discountActive === "true") {
+          breakdown.innerHTML = `<span style="text-decoration:line-through; color:#888;">&#8377;${originalPricePerNight.toLocaleString("en-IN")}</span> &#8377;${pricePerNight.toLocaleString("en-IN")} x ${nights} night(s) = <b>&#8377;${total.toLocaleString("en-IN")}</b> <span class="badge bg-success">15% OFF</span>`;
+        } else {
+          breakdown.innerHTML = `&#8377;${pricePerNight.toLocaleString("en-IN")} x ${nights} night(s) = <b>&#8377;${total.toLocaleString("en-IN")}</b>`;
+        }
+      } else {
+        breakdown.textContent = "Check-out must be after check-in.";
+      }
+    }
+    checkIn.addEventListener("change", updatePrice);
+    checkOut.addEventListener("change", updatePrice);
+  })();
+</script>
