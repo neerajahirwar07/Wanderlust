@@ -173,6 +173,7 @@ Visit: http://localhost:8080/
 
 ### Home Page
 
+
 <img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/09cf9e3a-617d-410d-bc61-c054d1245137" />
 
 ### Listing Details
